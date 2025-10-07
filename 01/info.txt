@@ -1,1 +1,1 @@
-Moja wersja composer to: [tutaj wpisz wersję]
+Moja wersja composer to: 2.8.11

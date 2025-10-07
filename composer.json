@@ -1,0 +1,25 @@
+{
+    "name": "kod/practice-php-composer-and-testing",
+    "authors": [
+        {
+            "name": "Marcin Tarnawa"
+        }
+    ],
+    "require": {
+        "illuminate/collections": "^12.30",
+        "maantje/charts": "^0.8.1"
+    },
+    "autoload": {
+    "psr-4": {
+        "Core\\": "Core/"
+    }
+},
+    "require-dev": {
+        "pestphp/pest": "^4.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
