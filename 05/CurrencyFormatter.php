@@ -2,28 +2,31 @@
 
 class CurrencyFormatter
 {
-    public function format($value)
+    public function format($value, $data, $formatData)
     {
-        $separatedValue = $this->decimal($value);
-        $formatedValue = $this->separateSign($separatedValue);
-        $finalValue = $this->addCurrency($formatedValue);
+        $separatedValue = $this->decimal($value, $formatData);
+        $finalValue = $this->addCurrency($separatedValue, $data);
         return $finalValue;
     }
 
-    public function separateSign($value)
+    public function addCurrency($value, $data = ["after" => "PLN"])
     {
-        $formatedValue = str_replace('.', ',', $value);
-        return $formatedValue;
-    }
-    
-    public function addCurrency($value, $currency = "PLN")
-    {
-        $value .= " $currency";
-        return $value;
+        $currency = $data["after"] ?? NULL;
+        $currencyBefore = $data["before"] ?? NULL;
+        if(isset($currency)){
+            $currencyFormated = $value . " $currency";
+        }
+        if(isset($currencyBefore)) {
+            $before = "";
+            $before .= $currencyBefore;
+            $currencyFormated = $currencyBefore . " $value";}
+        return $currencyFormated;
     }
 
-    public function decimal($value)
+    public function decimal($value, $formatData = ["decimal" => ",", "thousands" => ' '])
     {
-        return number_format((float)$value, 2, ',', ' ');
+        $separator = $formatData["decimal"];
+        $skip = $formatData["thousands"];
+        return number_format((float)$value, 2, $separator, $skip);
     }
 }

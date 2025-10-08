@@ -5,7 +5,8 @@ include 'CurrencyFormatter.php';
 $cf = new CurrencyFormatter();
 $str = $cf->format(
     2410.12, 
-    ['after' => 'PLN'], 
+    ['after' => 'PLN',
+    'before' => '$'], 
     ['decimal' => ',', 'thousands' => ' ']
 ); // => 2 410,12 PLN
 
