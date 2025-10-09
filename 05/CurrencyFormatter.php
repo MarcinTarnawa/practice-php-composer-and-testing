@@ -2,17 +2,17 @@
 
 class CurrencyFormatter
 {
-    public function format($value, $data, $formatData)
+    public function format($value, $dataCurrency = ["after" => "PLN"], $formatData = ["decimal" => ",", "thousands" => ' '])
     {
         $separatedValue = $this->decimal($value, $formatData);
-        $finalValue = $this->addCurrency($separatedValue, $data);
+        $finalValue = $this->addCurrency($separatedValue, $dataCurrency);
         return $finalValue;
     }
 
-    public function addCurrency($value, $data = ["after" => "PLN"])
+    public function addCurrency($value, $dataCurrency)
     {
-        $currency = $data["after"] ?? NULL;
-        $currencyBefore = $data["before"] ?? NULL;
+        $currency = $dataCurrency["after"] ?? NULL;
+        $currencyBefore = $dataCurrency["before"] ?? NULL;
         if(isset($currency)){
             $currencyFormated = $value . " $currency";
         }
@@ -20,10 +20,10 @@ class CurrencyFormatter
             $before = "";
             $before .= $currencyBefore;
             $currencyFormated = $currencyBefore . " $value";}
-        return $currencyFormated;
+        return trim($currencyFormated);
     }
 
-    public function decimal($value, $formatData = ["decimal" => ",", "thousands" => ' '])
+    public function decimal($value, $formatData)
     {
         $separator = $formatData["decimal"];
         $skip = $formatData["thousands"];
